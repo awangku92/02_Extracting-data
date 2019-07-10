@@ -15,19 +15,25 @@ def extractFiles(fromDir,toDir):
     if not os.path.exists(toDir):
         os.makedirs(toDir)
 
-    extractedFile = os.listdir("Extracted")
+    tempFile = os.listdir("Extracted")
+    extractedFile = []
+    for ef in tempFile  :
+        extractedFile.append(os.path.splitext(ef)[0])
+        # print (extractedFile)
 
     for f in filesList:
         # convert from list to string
         filename = f.split('.')[0]
         # print (filename)
+        # print (extractedFile)
 
         if filename not in extractedFile:
             # print(f)
             patoolib.extract_archive(f, outdir=toDir)
         else:
-            print("File already exist!")
-            break
+            print(filename + " already exist!")
+            # print(filename)
+        
 
 print('Start')
 
